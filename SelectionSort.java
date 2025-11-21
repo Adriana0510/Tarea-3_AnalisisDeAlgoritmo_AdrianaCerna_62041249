@@ -24,7 +24,7 @@ public class SelectionSort {
     public static void main(String[] args) {
         Random rand = new Random();
         
-        int[] sizes = {50000, 100000, 1000000, 10000000, 100000000, 1000000000};
+        int[] sizes = {100000, 2550000, 5000000};
         
         for (int size : sizes) 
         {
