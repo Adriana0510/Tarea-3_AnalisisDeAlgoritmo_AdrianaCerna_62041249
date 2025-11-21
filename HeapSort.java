@@ -49,7 +49,7 @@ public class HeapSort {
     public static void main(String[] args) {
         Random rand = new Random();
         
-        int[] sizes = {100000, 2550000, 5000000};
+        int[] sizes = {100000, 750000, 1000000};
         
         for (int size : sizes) 
         {

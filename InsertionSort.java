@@ -3,93 +3,78 @@ import java.util.concurrent.TimeUnit;
 
 public class InsertionSort {
     
-    public static void sort(int[] arr)
-    {
-        for (int i = 1; i < arr.length; i++) 
-        {
+    public static void sort(int[] arr) {
+        System.out.println("  Iniciando algoritmo de ordenamiento...");
+        for (int i = 1; i < arr.length; i++) {
             int key = arr[i];
             int j = i - 1;
-            while (j >= 0 && arr[j] > key) 
-            {
+            while (j >= 0 && arr[j] > key) {
                 arr[j + 1] = arr[j];
                 j--;
             }
             arr[j + 1] = key;
         }
+        System.out.println("Algoritmo terminado");
     }
     
     public static void main(String[] args) {
+        System.out.println("INICIANDO PRUEBAS DE INSERTION SORT");
         Random rand = new Random();
         
-        int[] sizes = {100000, 2550000, 5000000};
+        int[] sizes = {100000, 750000, 1500000};
         
-        for (int size : sizes) 
-        {
-            try 
-            {
-                System.out.println("=== Probando con " + size + " elementos ===");
+        for (int size : sizes) {
+            try {
+                System.out.println("\n=== Probando con " + size + " elementos ===");
                 
+                System.out.println("Paso 1: Creando arreglo...");
                 int[] arr = new int[size];
-
-                for (int i = 0; i < size; i++) 
-                {
+                System.out.println("Paso 2: Llenando arreglo...");
+                for (int i = 0; i < size; i++) {
                     arr[i] = rand.nextInt(size * 10);
                 }
+                System.out.println("Arreglo preparado - " + size + " elementos");
                 
-                if (size <= 100) 
-                {
-                    System.out.println("ARREGLO ORIGINAL:");
-                    System.out.println(Arrays.toString(arr));
-                } 
-                else 
-                {
-                    System.out.print("Original (primeros 50): [");
-                    for (int i = 0; i < Math.min(50, size); i++) 
-                    {
-                        System.out.print(arr[i] + (i < Math.min(49, size-1) ? ", " : ""));
-                    }
-                    System.out.println("]");
+                System.out.print("Muestra original: [");
+                for (int i = 0; i < Math.min(5, size); i++) {
+                    System.out.print(arr[i] + (i < Math.min(4, size-1) ? ", " : ""));
                 }
+                System.out.println("...]");
                 
+                System.out.println("Paso 3: Iniciando ordenamiento...");
                 long start = System.nanoTime();
                 sort(arr);
                 long end = System.nanoTime();
                 long tiempo = TimeUnit.NANOSECONDS.toMillis(end - start);
+                System.out.println("Paso 4: Ordenamiento completado");
                 
                 System.out.println("Tiempo: " + tiempo + " ms");
                 
-                if (size <= 100) 
-                {
-                    System.out.println("ARREGLO ORDENADO:");
-                    System.out.println(Arrays.toString(arr));
+                System.out.print("Muestra ordenada: [");
+                for (int i = 0; i < Math.min(5, size); i++) {
+                    System.out.print(arr[i] + (i < Math.min(4, size-1) ? ", " : ""));
                 }
-                else 
-                {
-                    System.out.print("Ordenado (primeros 50): [");
-                    for (int i = 0; i < Math.min(50, size); i++) 
-                    {
-                        System.out.print(arr[i] + (i < Math.min(49, size-1) ? ", " : ""));
-                    }
-                    System.out.println("]");
-                    
-                    System.out.print("Ordenado (ultimos 10): [");
-                    for (int i = Math.max(0, size-10); i < size; i++) 
-                    {
-                        System.out.print(arr[i] + (i < size-1 ? ", " : ""));
-                    }
-                    System.out.println("]");
-                }
+                System.out.println("...]");
                 
-                System.out.println();
+                boolean ordenado = true;
+                for (int i = 0; i < size - 1; i++) {
+                    if (arr[i] > arr[i + 1]) {
+                        ordenado = false;
+                        break;
+                    }
+                }
+                System.out.println("✓ Verificación: " + (ordenado ? "CORRECTO" : "INCORRECTO"));
                 
             } catch (OutOfMemoryError e) {
-                System.out.println("" + size + " elementos: ERROR - Memoria insuficiente");
+                System.out.println("ERROR MEMORIA: " + size + " elementos - " + e.getMessage());
                 break;
             } catch (Exception e) {
-                System.out.println("" + size + " elementos: ERROR - " + e.getMessage());
+                System.out.println("ERROR GENERAL: " + size + " elementos - " + e.getMessage());
+                e.printStackTrace();
                 break;
             }
         }
-        System.out.println("\n PRUEBA COMPLETADA");
+        
+        System.out.println("\\n TODAS LAS PRUEBAS COMPLETADAS");
     }
 }
