@@ -21,15 +21,13 @@ public class InsertionSort {
         System.out.println("INICIANDO PRUEBAS DE INSERTION SORT");
         Random rand = new Random();
         
-        int[] sizes = {100000, 750000, 1500000};
+        int[] sizes = {100000, 750000, 3000000};
         
         for (int size : sizes) {
             try {
                 System.out.println("\n=== Probando con " + size + " elementos ===");
                 
-                System.out.println("Paso 1: Creando arreglo...");
                 int[] arr = new int[size];
-                System.out.println("Paso 2: Llenando arreglo...");
                 for (int i = 0; i < size; i++) {
                     arr[i] = rand.nextInt(size * 10);
                 }
@@ -41,12 +39,12 @@ public class InsertionSort {
                 }
                 System.out.println("...]");
                 
-                System.out.println("Paso 3: Iniciando ordenamiento...");
+                System.out.println("Iniciando ordenamiento...");
                 long start = System.nanoTime();
                 sort(arr);
                 long end = System.nanoTime();
                 long tiempo = TimeUnit.NANOSECONDS.toMillis(end - start);
-                System.out.println("Paso 4: Ordenamiento completado");
+                System.out.println("Ordenamiento completado");
                 
                 System.out.println("Tiempo: " + tiempo + " ms");
                 
@@ -63,7 +61,7 @@ public class InsertionSort {
                         break;
                     }
                 }
-                System.out.println("✓ Verificación: " + (ordenado ? "CORRECTO" : "INCORRECTO"));
+                System.out.println("Verificación: " + (ordenado ? "CORRECTO" : "INCORRECTO"));
                 
             } catch (OutOfMemoryError e) {
                 System.out.println("ERROR MEMORIA: " + size + " elementos - " + e.getMessage());
